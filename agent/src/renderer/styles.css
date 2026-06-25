@@ -7,12 +7,15 @@ body {
   overflow: hidden;
 }
 
+<<<<<<< HEAD
 body.is-locked .panel {
   filter: blur(4px);
   opacity: 0.28;
   pointer-events: none;
 }
 
+=======
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 .bg-shape {
   position: fixed;
   border-radius: 999px;
@@ -52,7 +55,10 @@ body.is-locked .panel {
   padding: 32px;
   box-shadow: 0 30px 90px rgba(2, 6, 23, 0.45);
   backdrop-filter: blur(18px);
+<<<<<<< HEAD
   transition: opacity 160ms ease, filter 160ms ease;
+=======
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 }
 
 .eyebrow {
@@ -117,6 +123,7 @@ button {
 }
 
 .lock-overlay {
+<<<<<<< HEAD
   position: fixed;
   inset: 0;
   display: grid;
@@ -133,4 +140,21 @@ button {
   padding: 28px;
   text-align: center;
   box-shadow: 0 30px 100px rgba(0, 0, 0, 0.42);
+=======
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(2, 6, 23, 0.72);
+  border-radius: 32px;
+}
+
+.lock-card {
+  width: min(360px, 90%);
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(251, 113, 133, 0.4);
+  border-radius: 28px;
+  padding: 24px;
+  text-align: center;
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 }

@@ -6,6 +6,10 @@ const { app, BrowserWindow, ipcMain, dialog, powerMonitor } = require("electron"
 const Store = require("electron-store");
 const { io } = require("socket.io-client");
 const si = require("systeminformation");
+<<<<<<< HEAD
+=======
+const activeWin = require("active-win");
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 const screenshot = require("screenshot-desktop");
 
 const store = new Store();
@@ -15,7 +19,10 @@ const COMPUTER_ID = process.env.COMPUTER_ID || "PC-001";
 let mainWindow;
 let socket;
 let locked = false;
+<<<<<<< HEAD
 let statusInterval;
+=======
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 let session = {
   studentName: ""
 };
@@ -24,15 +31,20 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1100,
     height: 760,
+<<<<<<< HEAD
     show: false,
     autoHideMenuBar: true,
     backgroundColor: "#030712",
+=======
+    autoHideMenuBar: true,
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
     webPreferences: {
       preload: path.join(__dirname, "preload.js")
     }
   });
 
   mainWindow.loadFile(path.join(__dirname, "renderer", "index.html"));
+<<<<<<< HEAD
   mainWindow.once("ready-to-show", () => {
     mainWindow.maximize();
     mainWindow.show();
@@ -52,6 +64,8 @@ function applyLockState() {
   mainWindow.setFullScreen(false);
   mainWindow.setAlwaysOnTop(false);
   mainWindow.maximize();
+=======
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 }
 
 function getLocalIp() {
@@ -66,6 +80,7 @@ function getLocalIp() {
   return "127.0.0.1";
 }
 
+<<<<<<< HEAD
 async function getActiveWindowInfo() {
   try {
     const activeWinModule = await import("active-win");
@@ -81,6 +96,17 @@ async function collectStatus() {
     si.processes(),
     getActiveWindowInfo()
   ]);
+=======
+async function collectStatus() {
+  const [netStats, processes] = await Promise.all([si.networkStats(), si.processes()]);
+
+  let currentWindow = null;
+  try {
+    currentWindow = await activeWin();
+  } catch {
+    currentWindow = null;
+  }
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 
   let screenBase64 = null;
   try {
@@ -153,7 +179,10 @@ function connectSocket() {
 
   socket.on("teacher:lock", ({ locked: nextLocked }) => {
     locked = Boolean(nextLocked);
+<<<<<<< HEAD
     applyLockState();
+=======
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
     mainWindow?.webContents.send("agent:locked", locked);
   });
 
@@ -200,10 +229,16 @@ app.whenReady().then(() => {
   session.studentName = store.get("studentName", "");
   createWindow();
   connectSocket();
+<<<<<<< HEAD
   statusInterval = setInterval(() => {
     emitStatus().catch(() => {});
   }, 12000);
   applyLockState();
+=======
+  setInterval(() => {
+    emitStatus().catch(() => {});
+  }, 12000);
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 });
 
 app.on("browser-window-created", (_event, window) => {
@@ -214,12 +249,15 @@ powerMonitor.on("resume", () => {
   emitStatus().catch(() => {});
 });
 
+<<<<<<< HEAD
 app.on("before-quit", () => {
   if (statusInterval) {
     clearInterval(statusInterval);
   }
 });
 
+=======
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();

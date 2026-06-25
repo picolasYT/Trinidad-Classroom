@@ -18,6 +18,7 @@ echo COMPUTER_ID=%COMPUTER_ID%
 
 echo agent\.env generado automaticamente.
 call npm install
+<<<<<<< HEAD
 if errorlevel 1 (
   echo Fallo la instalacion del agente.
   endlocal
@@ -27,5 +28,7 @@ if errorlevel 1 (
 
 call "%~dp0register-agent-startup.bat"
 echo El agente se iniciara automaticamente al prender la PC.
+=======
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 endlocal
 pause

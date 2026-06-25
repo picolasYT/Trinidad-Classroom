@@ -16,6 +16,7 @@ echo CLIENT_ORIGIN=%CLIENT_ORIGIN%
 
 echo server\.env generado automaticamente.
 call npm install
+<<<<<<< HEAD
 if errorlevel 1 (
   echo Fallo la instalacion del servidor.
   endlocal
@@ -34,5 +35,8 @@ if errorlevel 1 (
 set /p AUTO_START=Quieres que el servidor se inicie automaticamente con Windows? [S/N]: 
 if /I "%AUTO_START%"=="S" call "%~dp0register-server-startup.bat"
 
+=======
+call npm run seed
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 endlocal
 pause

@@ -7,6 +7,7 @@
     "start": "electron ."
   },
   "dependencies": {
+<<<<<<< HEAD
     "active-win": "8.2.0",
     "dotenv": "16.4.5",
     "electron-store": "8.2.0",
@@ -17,5 +18,17 @@
   },
   "devDependencies": {
     "electron": "33.2.1"
+=======
+    "active-win": "^8.2.0",
+    "dotenv": "^16.4.5",
+    "electron-store": "^8.2.0",
+    "express": "^4.21.2",
+    "screenshot-desktop": "^1.15.3",
+    "socket.io-client": "^4.8.1",
+    "systeminformation": "^5.24.4"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1"
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
   }
 }

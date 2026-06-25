@@ -14,11 +14,14 @@ echo VITE_API_URL=http://%SERVER_IP%:%SERVER_PORT%
 
 echo dashboard\.env generado automaticamente.
 call npm install
+<<<<<<< HEAD
 if errorlevel 1 (
   echo Fallo la instalacion del dashboard.
   endlocal
   pause
   exit /b 1
 )
+=======
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 endlocal
 pause

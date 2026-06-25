@@ -9,7 +9,11 @@ function renderSession(session) {
   if (session.studentName) {
     sessionInfo.classList.remove("hidden");
     logoutBtn.classList.remove("hidden");
+<<<<<<< HEAD
     sessionInfo.textContent = `Sesion iniciada: ${session.studentName} | Equipo ${session.computerId}`;
+=======
+    sessionInfo.textContent = `Sesion iniciada: ${session.studentName} · Equipo ${session.computerId}`;
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
     nameInput.value = session.studentName;
   } else {
     sessionInfo.classList.add("hidden");
@@ -19,9 +23,14 @@ function renderSession(session) {
   }
 }
 
+<<<<<<< HEAD
 function setLocked(isLocked) {
   lockOverlay.classList.toggle("hidden", !isLocked);
   document.body.classList.toggle("is-locked", isLocked);
+=======
+function setLocked(locked) {
+  lockOverlay.classList.toggle("hidden", !locked);
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 }
 
 window.trinidadAgent.getSession().then((session) => {
@@ -49,8 +58,13 @@ window.trinidadAgent.onMessage((message) => {
   messageBox.textContent = `Aviso del profesor: ${message}`;
 });
 
+<<<<<<< HEAD
 window.trinidadAgent.onLocked((isLocked) => {
   setLocked(isLocked);
+=======
+window.trinidadAgent.onLocked((locked) => {
+  setLocked(locked);
+>>>>>>> 39f41b15146c102a681405ff4b60321dc94c3eab
 });
 
 window.trinidadAgent.onSession((session) => {
