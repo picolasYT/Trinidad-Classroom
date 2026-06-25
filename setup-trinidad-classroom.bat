@@ -1,10 +1,63 @@
 @echo off
-setlocal
+setlocal EnableExtensions
 title Trinidad Classroom - Instalacion
 color 0B
 set "ROOT_DIR=%~dp0"
 
-call :check_requirements || goto end
+cls
+echo ============================================================
+echo         TRINIDAD CLASSROOM - VERIFICANDO SISTEMA
+echo ============================================================
+echo.
+
+where node >nul 2>nul
+if errorlevel 1 (
+  echo Node.js no esta instalado en esta computadora.
+  echo.
+  set /p INSTALL_NODE=Quieres instalar Node.js LTS automaticamente con winget? [S/N]: 
+  if /I "%INSTALL_NODE%"=="S" goto install_node
+  echo.
+  echo No se puede continuar sin Node.js.
+  pause
+  goto end
+)
+
+where npm >nul 2>nul
+if errorlevel 1 (
+  echo npm no esta disponible en esta computadora.
+  echo Reinstala Node.js con npm incluido y vuelve a intentar.
+  pause
+  goto end
+)
+
+goto menu
+
+:install_node
+where winget >nul 2>nul
+if errorlevel 1 (
+  echo.
+  echo No se encontro winget en esta computadora.
+  echo Instala Node.js LTS manualmente desde https://nodejs.org/
+  pause
+  goto end
+)
+
+echo.
+echo Instalando Node.js LTS. Puede tardar unos minutos...
+winget install OpenJS.NodeJS.LTS --accept-package-agreements --accept-source-agreements
+if errorlevel 1 (
+  echo.
+  echo Fallo la instalacion automatica de Node.js.
+  echo Intenta instalarlo manualmente desde https://nodejs.org/
+  pause
+  goto end
+)
+
+echo.
+echo Node.js fue instalado.
+echo Cierra y vuelve a abrir este instalador.
+pause
+goto end
 
 :menu
 cls
@@ -45,6 +98,7 @@ echo Esta opcion instala el panel dashboard del profesor.
 echo El instalador te va a pedir la IP del servidor local.
 echo.
 call "%ROOT_DIR%scripts\install-dashboard.bat"
+pause
 goto menu
 
 :install_student
@@ -61,6 +115,7 @@ echo - puerto del servidor
 echo - ID fijo de esta computadora
 echo.
 call "%ROOT_DIR%scripts\install-agent.bat"
+pause
 goto menu
 
 :install_server
@@ -77,6 +132,7 @@ echo - dejar esta PC conectada a la misma red del aula
 echo - usar IP fija si es posible
 echo.
 call "%ROOT_DIR%scripts\install-server.bat"
+pause
 goto menu
 
 :help
@@ -105,54 +161,6 @@ echo - luego conviene cambiar la clave admin
 echo.
 pause
 goto menu
-
-:check_requirements
-where node >nul 2>nul
-if errorlevel 1 (
-  echo.
-  echo Node.js no esta instalado en esta computadora.
-  set /p INSTALL_NODE=Quieres instalar Node.js LTS automaticamente con winget? [S/N]: 
-  if /I not "%INSTALL_NODE%"=="S" exit /b 1
-  call :install_nodejs
-  exit /b 1
-)
-
-where npm >nul 2>nul
-if errorlevel 1 (
-  echo.
-  echo npm no esta disponible en esta computadora.
-  echo Reinstala Node.js con npm incluido y vuelve a intentar.
-  pause
-  exit /b 1
-)
-
-exit /b 0
-
-:install_nodejs
-where winget >nul 2>nul
-if errorlevel 1 (
-  echo.
-  echo No se encontro winget en esta computadora.
-  echo Instala Node.js LTS manualmente desde https://nodejs.org/
-  pause
-  exit /b 1
-)
-
-echo.
-echo Instalando Node.js LTS. Puede tardar unos minutos...
-winget install OpenJS.NodeJS.LTS --accept-package-agreements --accept-source-agreements
-if errorlevel 1 (
-  echo.
-  echo Fallo la instalacion automatica de Node.js.
-  echo Intenta instalarlo manualmente desde https://nodejs.org/
-  pause
-  exit /b 1
-)
-
-echo.
-echo Node.js fue instalado. Cierra y vuelve a abrir este instalador.
-pause
-exit /b 0
 
 :end
 endlocal
